@@ -29,7 +29,7 @@ export const Route = createFileRoute("/")({
 function Logo() {
   return (
     <a href="#top" className="flex items-center gap-2.5 text-ink">
-      <span className="grid size-9 place-items-center rounded-xl bg-brand/90 font-display text-lg font-bold text-white">
+      <span className="grid size-9 place-items-center rounded-xl bg-brand/90 font-display text-lg font-bold text-deep">
         L
       </span>
       <span className="font-display text-lg font-semibold tracking-tight">
@@ -123,7 +123,7 @@ function Hero() {
         <div className="mt-8 flex flex-wrap items-center gap-4">
           <a
             href="#demo"
-            className="rounded-xl bg-brand px-6 py-3.5 font-medium text-white shadow-lg shadow-brand/30 transition-colors hover:bg-brand/90"
+            className="rounded-xl bg-brand px-6 py-3.5 font-medium text-deep shadow-lg shadow-brand/30 transition-colors hover:bg-brand/90"
           >
             Try the interface
           </a>
@@ -306,7 +306,7 @@ function DemoSection() {
         </div>
         <a
           href="#demo"
-          className="self-start rounded-xl bg-brand px-6 py-3.5 font-medium text-white shadow-lg shadow-brand/30 transition-colors hover:bg-brand/90 md:self-auto"
+          className="self-start rounded-xl bg-brand px-6 py-3.5 font-medium text-deep shadow-lg shadow-brand/30 transition-colors hover:bg-brand/90 md:self-auto"
         >
           Open full prototype
         </a>
@@ -334,7 +334,7 @@ function Index() {
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
         <div className="lp-blob absolute -left-16 -top-24 size-[36rem] rounded-full bg-brand/40 blur-3xl" />
         <div className="lp-blob-rev absolute -right-24 top-1/3 size-[32rem] rounded-full bg-accent/30 blur-3xl" />
-        <div className="absolute bottom-0 left-1/4 size-[28rem] rounded-full bg-indigo-500/25 blur-3xl" />
+        <div className="absolute bottom-0 left-1/4 size-[28rem] rounded-full bg-white/15 blur-3xl" />
       </div>
 
       <div className="relative mx-auto max-w-6xl px-6 py-10">
