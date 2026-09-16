@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 
 /**
@@ -163,7 +164,13 @@ function Hero() {
       </div>
 
       {/* EMBED CONTAINER: Figma interface goes here */}
-      <FigmaEmbedSlot />
+      <FigmaEmbedSlot>
+        <iframe
+          style={{ border: "1px solid rgba(0, 0, 0, 0.1)", width: "100%", height: "100%" }}
+          src="https://embed.figma.com/proto/iSapCOb1M5uBllNYnZgIRi/BreB?page-id=0%3A1&node-id=2078-1017&p=f&viewport=523%2C341%2C0.07&scaling=scale-down&content-scaling=fixed&starting-point-node-id=2078%3A1017&embed-host=share"
+          allowFullScreen
+        />
+      </FigmaEmbedSlot>
     </section>
   );
 }
