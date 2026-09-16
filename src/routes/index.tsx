@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 
 /**
@@ -64,7 +65,13 @@ function Nav() {
  * To embed: replace the inner placeholder with a Figma iframe, e.g.
  *   <iframe src="https://www.figma.com/embed?embed_host=loto&url=..." allowFullScreen />
  */
-function FigmaEmbedSlot({ aspect = "4/3" }: { aspect?: string }) {
+function FigmaEmbedSlot({
+  aspect = "4/3",
+  children,
+}: {
+  aspect?: string;
+  children?: ReactNode;
+}) {
   return (
     <div className="relative">
       <div className="absolute -inset-4 rounded-[2rem] bg-gradient-to-tr from-brand/30 to-accent/20 blur-2xl" />
@@ -82,20 +89,26 @@ function FigmaEmbedSlot({ aspect = "4/3" }: { aspect?: string }) {
           id="loto-embed"
           data-figma-embed
           data-embed="figma"
-          className="grid w-full place-items-center rounded-2xl border border-dashed border-white/20 bg-white/5"
+          className={
+            children
+              ? "w-full overflow-hidden rounded-2xl border border-white/10 bg-white/5"
+              : "grid w-full place-items-center rounded-2xl border border-dashed border-white/20 bg-white/5"
+          }
           style={{ aspectRatio: aspect, minHeight: "clamp(360px, 50vw, 560px)" }}
         >
-          <div className="text-center">
-            <div className="mx-auto grid size-14 place-items-center rounded-2xl border border-white/20 bg-white/10 font-display text-2xl font-bold text-white/70">
-              QR
+          {children ?? (
+            <div className="text-center">
+              <div className="mx-auto grid size-14 place-items-center rounded-2xl border border-white/20 bg-white/10 font-display text-2xl font-bold text-white/70">
+                QR
+              </div>
+              <div className="mt-3 text-sm font-medium text-white/70">
+                Interface embed point
+              </div>
+              <div className="mt-1 text-xs text-white/40">
+                Paste your Figma embed code here
+              </div>
             </div>
-            <div className="mt-3 text-sm font-medium text-white/70">
-              Interface embed point
-            </div>
-            <div className="mt-1 text-xs text-white/40">
-              Paste your Figma embed code here
-            </div>
-          </div>
+          )}
         </div>
       </div>
     </div>
@@ -151,7 +164,13 @@ function Hero() {
       </div>
 
       {/* EMBED CONTAINER: Figma interface goes here */}
-      <FigmaEmbedSlot />
+      <FigmaEmbedSlot>
+        <iframe
+          style={{ border: "1px solid rgba(0, 0, 0, 0.1)", width: "100%", height: "100%" }}
+          src="https://embed.figma.com/proto/iSapCOb1M5uBllNYnZgIRi/BreB?page-id=0%3A1&node-id=2078-1017&p=f&viewport=523%2C341%2C0.07&scaling=scale-down&content-scaling=fixed&starting-point-node-id=2078%3A1017&embed-host=share"
+          allowFullScreen
+        />
+      </FigmaEmbedSlot>
     </section>
   );
 }
