@@ -70,7 +70,7 @@ function FigmaEmbedSlot({
   children,
 }: {
   aspect?: string;
-  children?: React.ReactNode;
+  children?: ReactNode;
 }) {
   return (
     <div className="relative">
