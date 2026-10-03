@@ -8,12 +8,20 @@ import {
   Scripts,
   type ErrorComponentProps,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import { Suspense, lazy, useEffect, useState, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-import { registerServiceWorker } from "../lib/register-service-worker";
-import { InstallPrompt } from "../components/InstallPrompt";
+
+const InstallPrompt = lazy(() =>
+  import("../components/InstallPrompt").then((m) => ({ default: m.InstallPrompt })),
+);
+
+function whenIdle(cb: () => void) {
+  const w = window as Window & { requestIdleCallback?: (cb: () => void) => number };
+  if (w.requestIdleCallback) w.requestIdleCallback(cb);
+  else setTimeout(cb, 1500);
+}
 
 function NotFoundComponent() {
   return (
@@ -97,12 +105,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "icon", href: "/favicon.png", type: "image/png" },
       { rel: "manifest", href: "/manifest.json" },
       { rel: "apple-touch-icon", href: "/icons/icon-192.png" },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&display=swap",
-      },
     ],
   }),
   shellComponent: RootShell,
