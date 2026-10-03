@@ -1,6 +1,9 @@
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
+@import "@fontsource/source-sans-3/latin-400.css";
+@import "@fontsource/source-sans-3/latin-600.css";
+@import "@fontsource/source-sans-3/latin-700.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -144,10 +147,12 @@
 
 @utility lp-blob {
   animation: lp-drift 16s ease-in-out infinite;
+  will-change: transform;
 }
 
 @utility lp-blob-rev {
   animation: lp-drift 20s ease-in-out infinite reverse;
+  will-change: transform;
 }
 
 @media (prefers-reduced-motion: reduce) {
