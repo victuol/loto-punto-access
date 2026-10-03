@@ -130,15 +130,24 @@ function RootShell({ children }: { children: ReactNode }) {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
+  const [idle, setIdle] = useState(false);
+
   useEffect(() => {
-    registerServiceWorker();
+    whenIdle(() => {
+      setIdle(true);
+      void import("../lib/register-service-worker").then((m) => m.registerServiceWorker());
+    });
   }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
-      <InstallPrompt />
+      {idle && (
+        <Suspense fallback={null}>
+          <InstallPrompt />
+        </Suspense>
+      )}
     </QueryClientProvider>
   );
 }

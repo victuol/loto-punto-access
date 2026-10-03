@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 
 /**
@@ -115,6 +115,36 @@ function FigmaEmbedSlot({
   );
 }
 
+function LazyFigma({ src }: { src: string }) {
+  const [on, setOn] = useState(false);
+  if (on) {
+    return (
+      <iframe
+        title="Loto Punto interactive prototype"
+        style={{ border: 0, width: "100%", height: "100%" }}
+        src={src}
+        allowFullScreen
+      />
+    );
+  }
+  return (
+    <button
+      type="button"
+      onClick={() => setOn(true)}
+      className="grid size-full place-items-center text-center"
+    >
+      <span>
+        <span className="mx-auto grid size-14 place-items-center rounded-2xl border border-white/20 bg-white/10 font-display text-2xl font-bold text-white/70">
+          ▶
+        </span>
+        <span className="mt-3 block text-sm font-medium text-white/80">
+          Load interactive prototype
+        </span>
+      </span>
+    </button>
+  );
+}
+
 function Hero() {
   return (
     <section id="top" className="mt-14 grid items-center gap-10 lg:grid-cols-2">
@@ -163,13 +193,9 @@ function Hero() {
         </div>
       </div>
 
-      {/* EMBED CONTAINER: Figma interface goes here */}
+      {/* EMBED CONTAINER: Figma interface goes here (loads on click for speed) */}
       <FigmaEmbedSlot>
-        <iframe
-          style={{ border: "1px solid rgba(0, 0, 0, 0.1)", width: "100%", height: "100%" }}
-          src="https://embed.figma.com/proto/iSapCOb1M5uBllNYnZgIRi/BreB?page-id=0%3A1&node-id=2078-1017&p=f&viewport=523%2C341%2C0.07&scaling=scale-down&content-scaling=fixed&starting-point-node-id=2078%3A1017&embed-host=share"
-          allowFullScreen
-        />
+        <LazyFigma src="https://embed.figma.com/proto/iSapCOb1M5uBllNYnZgIRi/BreB?page-id=0%3A1&node-id=2078-1017&p=f&viewport=523%2C341%2C0.07&scaling=scale-down&content-scaling=fixed&starting-point-node-id=2078%3A1017&embed-host=share" />
       </FigmaEmbedSlot>
     </section>
   );
