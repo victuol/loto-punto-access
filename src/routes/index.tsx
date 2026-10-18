@@ -61,15 +61,21 @@ function Nav() {
 }
 
 /**
- * Reserved container for the Figma interface prototype.
- * To embed: replace the inner placeholder with a Figma iframe, e.g.
- *   <iframe src="https://www.figma.com/embed?embed_host=loto&url=..." allowFullScreen />
+ * Framed embed container. Pass `children` (a Figma iframe, a video player, …)
+ * to fill it; without children it renders the marked placeholder slot.
+ * `id` keeps each container addressable, `embed` labels what fills it.
  */
 function FigmaEmbedSlot({
   aspect = "4/3",
+  id = "loto-embed",
+  label = "Figma embed",
+  embed = "figma",
   children,
 }: {
   aspect?: string;
+  id?: string;
+  label?: string;
+  embed?: string;
   children?: ReactNode;
 }) {
   return (
@@ -81,14 +87,14 @@ function FigmaEmbedSlot({
           <span className="size-2.5 rounded-full bg-white/30" />
           <span className="size-2.5 rounded-full bg-white/30" />
           <span className="ml-2 text-[11px] font-medium uppercase tracking-[0.2em] text-white/40">
-            Figma embed
+            {label}
           </span>
         </div>
-        {/* data-figma-embed: paste your Figma prototype iframe inside this div */}
+        {/* data-embed marks the container; paste your iframe inside this div */}
         <div
-          id="loto-embed"
-          data-figma-embed
-          data-embed="figma"
+          id={id}
+          data-embed={embed}
+          data-figma-embed={embed === "figma" ? "" : undefined}
           className={
             children
               ? "w-full overflow-hidden rounded-2xl border border-white/10 bg-white/5"
@@ -140,6 +146,65 @@ function LazyFigma({ src }: { src: string }) {
         <span className="mt-3 block text-sm font-medium text-white/80">
           Load interactive prototype
         </span>
+      </span>
+    </button>
+  );
+}
+
+/**
+ * YouTube container: shows the video's own thumbnail until it is clicked,
+ * then swaps in the player and starts playback immediately. Nothing is
+ * fetched from YouTube until the visitor asks for it.
+ */
+function LazyYouTube({
+  id,
+  title,
+  poster,
+}: {
+  id: string;
+  title: string;
+  poster?: string;
+}) {
+  const [on, setOn] = useState(false);
+  if (on) {
+    return (
+      <iframe
+        title={title}
+        style={{ border: 0, width: "100%", height: "100%" }}
+        src={`https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&modestbranding=1`}
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerPolicy="strict-origin-when-cross-origin"
+        allowFullScreen
+      />
+    );
+  }
+  return (
+    <button
+      type="button"
+      onClick={() => setOn(true)}
+      aria-label={`Play video: ${title}`}
+      className="group relative grid size-full place-items-center overflow-hidden text-center"
+    >
+      {poster ? (
+        <img
+          src={poster}
+          alt=""
+          loading="lazy"
+          decoding="async"
+          className="absolute inset-0 size-full object-cover opacity-70 transition duration-300 group-hover:opacity-95"
+        />
+      ) : null}
+      <span
+        className="absolute inset-0 bg-gradient-to-t from-deep/85 via-deep/30 to-deep/50"
+        aria-hidden="true"
+      />
+      <span className="relative flex flex-col items-center gap-3 px-6">
+        <span className="grid size-16 place-items-center rounded-full border border-white/25 bg-brand/90 text-deep shadow-xl shadow-brand/30 transition-transform duration-200 group-hover:scale-105">
+          <svg viewBox="0 0 24 24" fill="currentColor" className="ml-1 size-6" aria-hidden="true">
+            <path d="M8 5v14l11-7z" />
+          </svg>
+        </span>
+        <span className="text-sm font-medium text-white/85">Play video</span>
       </span>
     </button>
   );
@@ -339,25 +404,38 @@ function DemoSection() {
       <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
         <div className="max-w-xl">
           <span className="text-xs font-medium uppercase tracking-[0.2em] text-accent">
-            Interactive prototype
+            Watch the flow
           </span>
           <h2 className="mt-3 font-display text-3xl font-bold tracking-tight">
-            Try the cardless interface
+            See a withdrawal, start to finish
           </h2>
           <p className="mt-3 text-ink/60">
-            The slot below is reserved for a live Figma embed. Drop a prototype
-            iframe into the marked container and it renders at full width.
+            A short walkthrough of the cardless transaction. Press play and the
+            video starts right here — nothing loads from YouTube until you click.
           </p>
         </div>
         <a
-          href="#demo"
+          href="https://youtu.be/PQ8DxtPN9ck"
+          target="_blank"
+          rel="noopener noreferrer"
           className="self-start rounded-xl bg-brand px-6 py-3.5 font-medium text-deep shadow-lg shadow-brand/30 transition-colors hover:bg-brand/90 md:self-auto"
         >
-          Open full prototype
+          Watch on YouTube
         </a>
       </div>
       <div className="mt-8">
-        <FigmaEmbedSlot aspect="16/10" />
+        <FigmaEmbedSlot
+          aspect="16/10"
+          id="loto-video"
+          label="Video"
+          embed="youtube"
+        >
+          <LazyYouTube
+            id="PQ8DxtPN9ck"
+            title="Transaction Flow Loto Punto - U.S. Draft"
+            poster="https://i.ytimg.com/vi/PQ8DxtPN9ck/maxresdefault.jpg"
+          />
+        </FigmaEmbedSlot>
       </div>
     </section>
   );
