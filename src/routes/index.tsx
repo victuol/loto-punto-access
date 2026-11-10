@@ -1,5 +1,6 @@
 import { useState, type ReactNode } from "react";
 import { createFileRoute } from "@tanstack/react-router";
+import paperAsset from "@/assets/agentic-teller-machines.pdf.asset.json";
 
 /**
  * Loto Punto — marketing landing page (English).
@@ -15,10 +16,10 @@ export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "Loto Punto — Cardless cash access for banking deserts" },
-      { name: "description", content: "Loto Punto is developing a cardless ATM interface that minimizes transaction fees using dynamic QR codes and mobile banking integration — bringing affordable cash access back to U.S. neighborhoods abandoned by traditional bank branches." },
-      { property: "og:title", content: "Loto Punto — Cardless cash access for banking deserts" },
-      { property: "og:description", content: "A cardless ATM interface using dynamic QR codes and mobile banking to lower transaction fees where traditional branches have disappeared." },
+      { title: "Loto Punto — Secure cardless ATM cash access" },
+      { name: "description", content: "Loto Punto is a cardless ATM: withdraw cash with your phone number and a one-time code, settled instantly over FedNow and RTP — no card, no skimmers, no PIN pad." },
+      { property: "og:title", content: "Loto Punto — Secure cardless ATM cash access" },
+      { property: "og:description", content: "Phone number + one-time code + instant payment rails. A cardless ATM that removes skimming risk and card-network fees." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -49,6 +50,7 @@ function Nav() {
         <a href="#solution" className="transition-colors hover:text-ink">Solution</a>
         <a href="#demo" className="transition-colors hover:text-ink">Prototype</a>
         <a href="#research" className="transition-colors hover:text-ink">Research</a>
+        <a href="#paper" className="transition-colors hover:text-ink">Paper</a>
       </div>
       <a
         href="#demo"
@@ -219,14 +221,14 @@ function Hero() {
           Financial access, reimagined
         </span>
         <h1 className="mt-5 font-display text-5xl font-bold leading-[1.05] tracking-tight md:text-6xl">
-          Skip the card.
+          No card. No skimmers.
           <br />
-          <span className="text-white/50">Skip the fees.</span>
+          <span className="text-white/50">No PIN pad.</span>
         </h1>
         <p className="mt-6 max-w-md text-lg leading-relaxed text-ink/70">
-          A cardless ATM that pairs with your existing mobile bank. Scan a dynamic
-          QR code, access your own cash, and pay a fraction of out-of-network
-          costs — where the branches have gone.
+          Withdraw cash with just your phone number and a one-time code sent to
+          your phone. Your bank pays the ATM instantly — no card network in
+          between.
         </p>
         <div className="mt-8 flex flex-wrap items-center gap-4">
           <a
@@ -246,13 +248,13 @@ function Hero() {
           <div>
             <div className="font-display text-3xl font-bold">83%</div>
             <div className="mt-1 text-sm text-ink/55">
-              of Americans still rely on cash daily
+              of Americans use cash monthly
             </div>
           </div>
           <div>
-            <div className="font-display text-3xl font-bold text-accent">−60%</div>
+            <div className="font-display text-3xl font-bold text-accent">243K</div>
             <div className="mt-1 text-sm text-ink/55">
-              typical transaction fee reduction
+              debit cards compromised in 2025 (+90%)
             </div>
           </div>
         </div>
@@ -274,23 +276,22 @@ function Problem() {
           The problem
         </span>
         <h2 className="mt-3 font-display text-3xl font-bold tracking-tight">
-          When the branch leaves, the fees move in.
+          Card-based ATMs are failing the people who need cash most.
         </h2>
       </div>
       <div className="mt-6 grid gap-6 md:grid-cols-2">
         <p className="text-pretty text-lg leading-relaxed text-ink/70">
-          Rising real estate costs and overhead have driven traditional bank
-          branches out of low-income neighborhoods, creating vast banking
-          deserts. Low-income adults are left facing severe financial strain,
-          forced to navigate exorbitant out-of-network ATM fees simply to
-          access their own money.
+          Physical cards keep ATMs exposed to skimmers, fake keypad overlays and
+          chip-fallback attacks that force terminals back to the easily cloned
+          magnetic stripe. A single skimming device can harvest 750–1,000 cards
+          in just three days — roughly $30,000 stolen before anyone notices.
         </p>
         <p className="text-pretty text-lg leading-relaxed text-ink/70">
-          Deprived of affordable institutional banking, vulnerable populations
-          are pushed toward predatory alternatives — check cashers, payday
-          lenders, and loan sharks — to meet basic liquidity needs. Cash remains
-          an unavoidable daily utility for 83% of Americans, yet the physical gap
-          to reach it keeps widening.
+          Meanwhile, U.S. bank branches fell 5.6% between 2019 and 2023, yet
+          over 83% of consumers still rely on cash every month. Tapping a phone
+          instead of a card doesn&apos;t fix the problem — it only digitizes the
+          first touch, leaving the same decades-old process and weaknesses in
+          place.
         </p>
       </div>
     </section>
@@ -301,20 +302,20 @@ function Solution() {
   const features = [
     {
       step: "1",
-      title: "Dynamic QR pairing",
-      body: "No physical card. A rotating, session-bound code links the terminal to the bank app already in your pocket — eliminating the card rail entirely.",
+      title: "Enter your phone number",
+      body: "No card and no PIN. Your mobile number identifies your account at the ATM — nothing to skim, clone or forget.",
       tone: "brand",
     },
     {
       step: "2",
-      title: "App-native withdrawals",
-      body: "Your existing mobile banking does the work. Open the app, authorize the amount, and the machine dispenses — no new account, no new credentials.",
+      title: "Confirm with a one-time code",
+      body: "A single-use code is texted to your phone, already protected by your biometrics or passcode. Enter it at the ATM to authorize.",
       tone: "accent",
     },
     {
       step: "3",
-      title: "Lower-barrier economics",
-      body: "Fewer machines, fewer intermediaries, less drift toward check cashers and payday traps — lowering the cost of accessing your own money.",
+      title: "Instant, direct payment",
+      body: "Your bank pays over FedNow and RTP instant rails — no Visa or Mastercard switch, no interchange tolls. Settlement is immediate and the cash is dispensed.",
       tone: "neutral",
     },
   ];
@@ -329,7 +330,7 @@ function Solution() {
           How Loto Punto closes the gap
         </h2>
         <p className="mt-3 text-ink/60">
-          Self-service access built for the neighborhoods banks left behind.
+          A distributed, cardless workflow across three separate checkpoints: the ATM, your phone and your bank.
         </p>
       </div>
       <div className="mt-8 grid gap-6 md:grid-cols-3">
@@ -366,30 +367,32 @@ function ResearchBand() {
         <div className="grid gap-8 md:grid-cols-[1.4fr_1fr] md:items-center">
           <div>
             <span className="text-xs font-medium uppercase tracking-[0.2em] text-accent">
-              The research objective
+              The research question
             </span>
             <p className="mt-4 font-display text-2xl font-medium leading-snug text-ink/90">
-              Establishing a theoretical and practical framework for designing
-              self-service financial interfaces that maximize economic
-              accessibility while advancing resource conservation across human,
-              computational, physical, and financial dimensions.
+              &ldquo;Can a distributed system architecture combining mobile
+              devices and instant payment rails mitigate security
+              vulnerabilities inherent to physical cards in ATMs?&rdquo;
             </p>
             <p className="mt-4 text-pretty leading-relaxed text-ink/60">
-              Driving adoption introduces a behavioral barrier: entrenched habits
-              around physical payment cards create cognitive friction when users
-              transition to a completely new interaction model. This study frames
-              how a cardless interface can earn that habit change — without adding
-              cost to the people least able to pay it.
+              Removing the card shifts risk away from hardware and toward
+              software, identity and telecom channels. The research names those
+              new threats openly — SIM swapping, mobile malware and scams that
+              trick people into sharing their one-time code.
             </p>
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div className="rounded-xl border border-glass-border bg-glass p-4">
-              <div className="font-display text-2xl font-bold">4</div>
-              <div className="mt-1 text-xs text-ink/55">conservation dimensions</div>
+              <div className="font-display text-2xl font-bold">0</div>
+              <div className="mt-1 text-xs text-ink/55">card readers</div>
             </div>
             <div className="rounded-xl border border-glass-border bg-glass p-4">
-              <div className="font-display text-2xl font-bold">0</div>
-              <div className="mt-1 text-xs text-ink/55">physical cards required</div>
+              <div className="font-display text-2xl font-bold">3</div>
+              <div className="mt-1 text-xs text-ink/55">separate checkpoints (ATM, phone, bank)</div>
+            </div>
+            <div className="col-span-2 rounded-xl border border-glass-border bg-glass p-4">
+              <div className="font-display text-2xl font-bold text-accent">24/7</div>
+              <div className="mt-1 text-xs text-ink/55">instant payment settlement</div>
             </div>
           </div>
         </div>
@@ -410,8 +413,9 @@ function DemoSection() {
             See a withdrawal, start to finish
           </h2>
           <p className="mt-3 text-ink/60">
-            A short walkthrough of the cardless transaction. Press play and the
-            video starts right here — nothing loads from YouTube until you click.
+            Phone number, one-time code, instant payment, cash. Press play and
+            the video starts right here — nothing loads from YouTube until you
+            click.
           </p>
         </div>
         <a
@@ -441,10 +445,88 @@ function DemoSection() {
   );
 }
 
+const comparison = [
+  ["Identity check", "Plastic card number and a static keypad PIN.", "Phone number and a one-time code sent by text."],
+  ["Payment route", "Third-party card switches (Visa, Mastercard).", "Direct instant rails (FedNow / RTP)."],
+  ["Payment timing", "Multiple intermediaries, days of delay.", "Immediate 24/7/365 settlement."],
+  ["Hardware security", "Exposed to skimmers, fake keypads, chip fallback.", "No card reader and no PIN keypad at all."],
+  ["Trust", "One coupled terminal with unencrypted layers.", "Isolated checkpoints: ATM, phone and bank."],
+];
+
+function PaperSection() {
+  const url = paperAsset.url;
+  return (
+    <section id="paper" className="mt-24 scroll-mt-24">
+      <div className="max-w-2xl">
+        <span className="text-xs font-medium uppercase tracking-[0.2em] text-accent">
+          The paper
+        </span>
+        <h2 className="mt-3 font-display text-3xl font-bold tracking-tight">
+          Agentic Teller Machines: Architecting Secure Cardless Interfaces for
+          Inclusive Cash Access
+        </h2>
+        <p className="mt-4 text-pretty leading-relaxed text-ink/60">
+          The paper proposes a distributed ATM where the phone replaces the card
+          and PIN, and real-time account-to-account rails replace card networks
+          — removing physical skimming risk while settling every withdrawal
+          instantly.
+        </p>
+      </div>
+
+      <div className="mt-8 overflow-hidden rounded-2xl border border-glass-border bg-glass backdrop-blur-xl">
+        <div className="grid grid-cols-[1fr_1.3fr_1.3fr] gap-4 border-b border-glass-border px-5 py-3 text-xs font-medium uppercase tracking-[0.15em] text-ink/50">
+          <span>Category</span>
+          <span>Legacy ATM</span>
+          <span className="text-accent">Cardless ATM</span>
+        </div>
+        {comparison.map(([cat, old, next]) => (
+          <div
+            key={cat}
+            className="grid grid-cols-[1fr_1.3fr_1.3fr] gap-4 border-b border-glass-border/60 px-5 py-4 text-sm last:border-b-0"
+          >
+            <span className="font-semibold text-ink">{cat}</span>
+            <span className="text-ink/55">{old}</span>
+            <span className="text-ink/85">{next}</span>
+          </div>
+        ))}
+      </div>
+
+      <div className="mt-8 flex flex-wrap gap-4">
+        <a
+          href={url}
+          download="agentic-teller-machines.pdf"
+          className="rounded-xl bg-brand px-6 py-3.5 font-medium text-deep shadow-lg shadow-brand/30 transition-colors hover:bg-brand/90"
+        >
+          Download PDF
+        </a>
+        <a
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="rounded-xl border border-glass-border bg-glass px-6 py-3.5 font-medium text-ink/80 backdrop-blur transition-colors hover:bg-white/15"
+        >
+          Open in new tab
+        </a>
+      </div>
+
+      <div className="mt-8">
+        <FigmaEmbedSlot aspect="3/4" id="loto-paper" label="Paper (PDF)" embed="pdf">
+          <iframe
+            title="Agentic Teller Machines paper"
+            src={`${url}#view=FitH`}
+            loading="lazy"
+            style={{ border: 0, width: "100%", height: "100%" }}
+          />
+        </FigmaEmbedSlot>
+      </div>
+    </section>
+  );
+}
+
 function Footer() {
   return (
     <footer className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-glass-border pt-8 text-sm text-ink/40 md:flex-row">
-      <span>Loto Punto — concept prototype · Cardless cash access</span>
+      <span>Loto Punto — concept prototype · Secure cardless cash access</span>
       <span>Bringing affordable cash back to banking deserts</span>
     </footer>
   );
@@ -467,6 +549,7 @@ function Index() {
         <Solution />
         <DemoSection />
         <ResearchBand />
+        <PaperSection />
         <Footer />
       </div>
     </div>
