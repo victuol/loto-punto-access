@@ -107,7 +107,7 @@ function FigmaEmbedSlot({
           {children ?? (
             <div className="text-center">
               <div className="mx-auto grid size-14 place-items-center rounded-2xl border border-white/20 bg-white/10 font-display text-2xl font-bold text-white/70">
-                QR
+                ▶
               </div>
               <div className="mt-3 text-sm font-medium text-white/70">
                 Interface embed point
